@@ -2,6 +2,7 @@ var express = require('express');
 
 var path = require('path');
 var bodyParser = require('body-parser');
+var url = require('url');
 var app = express();
 
 var sampleArray = [{"id":"7e617013-a789-4be3-86b3-d451aaf18845","first_name":"Hamilton","last_name":"Escalero","birth_date":"10/25/1971","credit_card":"344061003919575","iban":"ME87 2896 5417 2304 4031 72","balance":"58651.14","currency":"CNY","credit_card_type":"americanexpress"},
@@ -62,7 +63,17 @@ app.use(express.static(__dirname));
 /* GET customers */ 
 app.get('/api/getCustomers', function(req,res) {
   res.json(sampleArray);
-})
+});
+
+app.get('/api/getCustomer', function(req,res) {
+  
+  var url_parts = url.parse(req.url, true);
+  var query = url_parts.query;
+  console.log('this is single customer:', query.customer);
+  var customer = sampleArray.find((elem) => {return elem.first_name === query.customer});
+  //console.log('customer:', customer);
+  res.json(customer);
+});
 
 app.post('/api/checkCCNo', function(req,res) {
   let ccNo = req.body.ccNo;
