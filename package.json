@@ -14,5 +14,17 @@
     "express": "^4.15.3",
     "http": "0.0.0",
     "path": "^0.12.7"
+  },
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-animate": "^1.6.4",
+    "angular-aria": "^1.6.4",
+    "angular-material": "^1.1.4",
+    "angular-messages": "^1.6.4",
+    "angular-mocks": "^1.6.4",
+    "angular-translate": "^2.15.2",
+    "angular-translate-loader-partial": "^2.15.2",
+    "angular-translate-loader-static-files": "^2.15.2",
+    "angular-ui-router": "^1.0.3"
   }
 }

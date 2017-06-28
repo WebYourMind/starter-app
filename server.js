@@ -77,7 +77,7 @@ app.get('/api/getCustomer', function(req,res) {
 
 app.post('/api/checkCCNo', function(req,res) {
   let ccNo = req.body.ccNo;
-//  console.log('ccNo', ccNo);
+  console.log('ccNo', ccNo);
   let ccRegex = new RegExp('^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$');
   let isValid = ccRegex.test(ccNo);
   //console.log('ccNo isValid', isValid);
@@ -90,7 +90,7 @@ app.post('/api/checkCCNo', function(req,res) {
 
 app.post('/api/checkIban', function(req,res) {
   let iban = req.body.iban;
-  //console.log('iban', iban);
+  console.log('iban', iban);
   let ibanRegex = new RegExp('^[A-Z]{2}(?:\s*[0-9a-zA-Z]\s*){20}$');
   let isValid = ibanRegex.test(iban);
   //console.log('iban isValid', isValid);
@@ -100,6 +100,39 @@ app.post('/api/checkIban', function(req,res) {
   }
   res.json(response);
 });
+
+app.get('/api/customer', function(req,res){
+  console.log('customer.get');
+  var url_parts = url.parse(req.url, true);
+  var query = url_parts.query;
+  if (query.customer){
+    let customer = {};
+    customer = sampleArray.find(function(elem){
+      return elem.first_name === query.customer;
+    });
+    res.json(customer);
+  }else{
+    res.json(sampleArray);
+  }
+})
+
+app.post('/api/customer', function(req,res){
+  console.log('customer.post');
+  let response = {}
+  res.json(response);
+})
+
+app.put('/api/customer', function(req,res){
+  console.log('customer.put');
+  let response = {}
+  res.json(response);
+})
+
+app.delete('/api/customer', function(req,res){
+  console.log('customer.delete');
+  let response = {}
+  res.json(response);
+})
 
 /* GET home page. */
 app.get('/*', function(req, res, next) {
